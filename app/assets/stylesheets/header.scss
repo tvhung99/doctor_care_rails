@@ -1,0 +1,27 @@
+@import "base";
+.header{
+  height: 66px !important;
+  padding: 0 28px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+  background-color: white !important;
+  //position: static !important;
+  &__logo{
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+  }
+  &__image{
+    width: 64px;
+    img {
+      width: 100%;
+    }
+  }
+  &__slogan{
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+  }
+}

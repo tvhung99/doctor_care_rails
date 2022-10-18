@@ -1,0 +1,9 @@
+<div class="common pb-3">
+  <div class="common__top pb-1 d-flex justify-content-between align-items-end">
+    <h2 class="common__heading h3 mb-0"><%= title %></h2>
+    <div class="common__see-all">
+      <%= link_to "Xem tất cả", see_all %>
+    </div>
+  </div>
+  <%= render "common_list", list: data, view_detail: view_detail %>
+</div>

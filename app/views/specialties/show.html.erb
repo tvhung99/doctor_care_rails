@@ -1,0 +1,13 @@
+<h2 class="h3"><%= @specialty.name %></h2>
+<div class="row">
+  <div class="col-6">
+    <h4>Thông tin</h4>
+    <%= @specialty.description.html_safe %>
+  </div>
+  <div class="col-6">
+    <h4>Bác sĩ</h4>
+    <% @doctors.each do  |doctor| %>
+     <%= doctor.user.first_name + " " + doctor.user.last_name %>
+    <% end %>
+  </div>
+</div>

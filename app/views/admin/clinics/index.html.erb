@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between">
+  <h4>Clinics</h4>
+  <%= link_to new_admin_clinic_path,class: "btn btn-primary" do %>
+    <i class="fa fa-plus"></i>
+    <span>New</span>
+  <% end %>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">No.</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Địa chỉ</th>
+    <th scope="col">Mô tả</th>
+    <th scope="col">Ảnh</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @clinics.each_with_index do |clinic, index| %>
+    <tr>
+      <td class="col-1"><%= index + 1%></td>
+      <td class="col-2"><%= clinic.name %></td>
+      <td class="col-3"><%= clinic.address %></td>
+      <td class="col-2">
+        <%= clinic.short_description %>
+      </td>
+      <td class="col-2">
+        <%= image_tag clinic.images.last, class: "img-thumbnails img-fluid rounded" if clinic.images.attached? %>
+        <%= image_tag "/images/default.jpg", class: "img-thumbnails img-fluid rounded" unless clinic.images.attached?%>
+      </td>
+      <td class="col-2">
+        <% if can? :update, clinic %>
+          <%= link_to edit_admin_clinic_path clinic do %>
+            <i class="fa fa-pen"></i>
+          <% end %>
+        <% end %>
+        <% if can? :delete, clinic %>
+          <%= link_to admin_clinic_path(clinic), method: :delete ,data: { confirm: "Are you sure?" } do %>
+            <i class="fa fa-trash mx-3"></i>
+          <% end %>
+        <%  end %>
+        <% if can? :read, clinic %>
+          <%= link_to admin_clinic_path(clinic), method: :get do %>
+            <i class="fa fa-eye"></i>
+          <% end %>
+        <%  end %>
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

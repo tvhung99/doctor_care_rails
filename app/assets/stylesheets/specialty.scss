@@ -1,0 +1,57 @@
+.specialty{
+  &__top{
+    --bs-gutter-x: 0 !important;
+  }
+  &__banner{
+    position: relative;
+    padding-bottom: 50px;
+    padding-right: 0 !important;
+    height: 540px;
+    overflow: hidden;
+    background-color: transparent;
+    width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    position: relative;
+  }
+  &__service{
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 570px;
+  }
+  &__content{
+    max-width: 570px;
+    width: 40%;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    padding-bottom: 0;
+    margin-bottom: 30px;
+    font-weight: 400;
+    background: linear-gradient(95.6deg,#21e9cd 6.58%,#fdfffe 61.56%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &__heading{
+    &-text{
+      color: white !important;
+    }
+  }
+  &__main{
+    background-size: cover;
+    background-repeat: repeat-y;
+    background-position: left bottom;
+    &-content{
+      margin-top: 30px;
+    }
+  }
+
+  &__list{
+
+  }
+}

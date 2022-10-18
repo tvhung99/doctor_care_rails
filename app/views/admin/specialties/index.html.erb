@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between">
+  <h4>Clinics</h4>
+  <%= link_to new_admin_specialty_path,class: "btn btn-primary" do %>
+    <i class="fa fa-plus"></i>
+    <span>New</span>
+  <% end %>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">No.</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Ảnh</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @specialties.each_with_index do |specialty, index| %>
+    <tr>
+      <td class="col-1"><%= index + 1%></td>
+      <td class="col-2"><%= specialty.name %></td>
+      <td class="col-2">
+        <%= image_tag specialty.images.last, class: "img-thumbnails img-fluid rounded" if specialty.images.attached? %>
+        <%= image_tag "/images/default.jpg", class: "img-thumbnails img-fluid rounded" unless specialty.images.attached?%>
+      </td>
+      <td class="col-2">
+        <% if can? :update, specialty %>
+          <%= link_to edit_admin_specialty_path specialty do %>
+            <i class="fa fa-pen"></i>
+          <% end %>
+        <% end %>
+        <% if can? :delete, specialty %>
+          <%= link_to admin_specialty_path(specialty), method: :delete ,data: { confirm: "Are you sure?" } do %>
+            <i class="fa fa-trash mx-3"></i>
+          <% end %>
+        <%  end %>
+        <% if can? :read, specialty %>
+          <%= link_to admin_specialty_path(specialty), method: :get do %>
+            <i class="fa fa-eye"></i>
+          <% end %>
+        <%  end %>
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

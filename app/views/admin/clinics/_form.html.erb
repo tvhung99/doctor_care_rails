@@ -1,0 +1,49 @@
+
+<div class="mt-5 form">
+  <%- is_new = current_page?(new_admin_clinic_path) %>
+  <%= form_with model: @clinic, url: is_new ? admin_clinics_path : admin_clinic_path(@clinic.id), method: is_new ? :post : :put, id: 'new_clinic' do |f| %>
+    <div class="row">
+      <div class="col-6">
+        <div class="row mt-2">
+          <div class="col-12">
+            <%= f.label "Tên phòng khám", class: "form-label required" %>
+            <%= f.text_field :name, class: "form-control", placeholder: "Tên phòng khám" %>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <%= f.label "Địa chỉ", class: "form-label required" %>
+            <%= f.text_field :address, class: "form-control", placeholder: "Địa chỉ" %>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <%= f.label "Mô tả ngắn", class: "form-label required" %>
+            <%= f.text_field :short_description, class: "form-control", placeholder: "Mô tả ngắn" %>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <%= f.label "Hình ảnh", class: "form-label required" %>
+            <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control" %>
+          </div>
+        </div>
+        <div class="d-grid gap-2 mt-2">
+          <%= f.submit is_new ? "Tạo phòng khám" : "Cập nhật", class: "btn btn-primary" %>
+        </div>
+      </div>
+      <div class="col-6 mt-2" id="user_doctor_description">
+        <%= f.label "Thông tin", class: "form-label" %>
+        <div class="form-group">
+          <%= f.rich_text_area :description, value: @clinic&.description %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js">
+  </script>
+  <script type="text/javascript">
+
+  </script>
+</div>

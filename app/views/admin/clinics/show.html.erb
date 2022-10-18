@@ -1,0 +1,55 @@
+<div class="wrapper p-5">
+  <div class="row">
+    <div class="col-2">
+      <%= image_tag @clinic.images.last, class: "img-thumbnails img-fluid rounded" if @clinic.images.attached? %>
+      <%= image_tag "/images/default.jpg", class: "img-thumbnails img-fluid rounded" unless @clinic.images.attached? %>
+    </div>
+    <div class="col-10">
+      <h1 class="h1"><%= @clinic.name %></h1>
+      <h6 class="h6"> <b>Địa chỉ: </b> <%=  @clinic.address %></h6>
+      <h6 class="h6"><%= @clinic.short_description %></h6>
+    </div>
+  </div>
+
+
+  <h3 class="h5 mt-5">Các chuyên khoa của <%= @clinic.name %> </h3>
+  <% @clinic.clinic_specialty_mappings.each do |mapping| %>
+    <%= link_to  admin_clinic_specialty_mapping_path(mapping&.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+      <span class="badge rounded-pill bg-info text-light tag "><%= mapping&.specialty.name %></span>
+    <% end %>
+  <% end %>
+
+  <div class="row">
+    <button class="btn btn__primary mt-4" data-bs-toggle="modal" data-bs-target="#add-specialty-modal">Thêm chuyên khoa</button>
+    <div class="modal fade" id="add-specialty-modal" tabindex="-1" aria-labelledby="add-specialty-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: admin_clinic_specialty_mappings_path, method: :post do |f| %>
+              <div class="col-12">
+                <%= f.hidden_field :clinic_id, value: @clinic.id %>
+                <%= f.label "Chuyên khoa", class: "form-label" %>
+                <%= f.collection_select :specialty_id, Specialty.all,:id,:name,{selected: @user&.doctor&.specialty_id}, {class: "form-select"} %>
+                <div class="d-flex justify-content-end mt-4">
+                  <%= f.submit "Thêm", class: "btn btn__primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="h3 mt-5">Chi tiết về <%= @clinic.name %></h3>
+  <hr />
+  <div class="row">
+    <div>
+      <%= @clinic.description.html_safe %>
+    </div>
+  </div>
+</div>

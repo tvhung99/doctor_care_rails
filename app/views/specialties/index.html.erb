@@ -1,0 +1,31 @@
+<div class="specialty">
+  <div class="row specialty__top">
+    <div class="col-12 specialty__banner" style="background-image: url('/images/specialty.svg')" >
+      <div class="container">
+        <div class="specialty__content">
+          <div class="specialty__heading">
+            <h1 class="specialty__heading-primary">
+              Bạn thấy không khoẻ?
+              <br>
+              Hãy để DoctorCare chăm sóc cho bạn!
+            </h1>
+            <p class="specialty__heading-text mt-3">
+              Tìm hiểu thêm về các dịch vụ chăm sóc sức khỏe của chúng tôi, từ cảm mạo thông thường đến các bệnh mạn tính - các bác sĩ của DoctorCare thân thiện sẽ tận tình chăm sóc bạn và gia đình.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="specialty__service" style="background-image: url('/images/specialtry-service.svg')">
+
+      </div>
+    </div>
+  </div>
+  <div class="specialty__main pt-2" style="background-image: url('/images/background.svg')">
+      <div class="ribbon text-center">Danh sách chuyên khoa</div>
+      <div class="specialty__main-content" >
+        <div class="container">
+          <%= render "shared/common_list",list: @specialties, view_detail: 'specialty' %>
+        </div>
+      </div>
+  </div>
+</div>

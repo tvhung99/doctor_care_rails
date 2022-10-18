@@ -1,0 +1,17 @@
+<% provide(:title, "log in") %>
+
+<div style="height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center;" class="row">
+  <h1>Đăng nhập</h1>
+  <div class="col-md-6 form-login">
+    <%= form_for(:session, url: login_path) do |f| %>
+      <%= f.hidden_field :url, value: @url%>
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password, "Mật khẩu" %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.submit "Đăng nhập", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between">
+    <h4>Users</h4>
+    <%= link_to new_admin_user_path,class: "btn btn-primary" do %>
+        <i class="fa fa-plus"></i>
+        <span>New</span>
+    <% end %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Họ Tên</th>
+      <th scope="col">Giới Tính</th>
+      <th scope="col">Đã xác nhận</th>
+      <th scope="col">Role</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each_with_index do |user, index| %>
+        <tr>
+            <td scope="col"><%= index + 1%></td>
+            <td scope="col"><%= user.last_name + user.first_name %></td>
+            <td scope="col"><%= user.gender %></td>
+            <td scope="col">
+                <% if user.confirmed? %>
+                    <span class="badge bg-success">Đã kích hoạt</span>
+                <% else %>
+                    <span class="badge bg-danger">Chưa kích hoạt</span>
+                <% end %>
+            </td>
+            <td scope="col"><%= user.role.name %></td>
+            <td scope="col">
+                <% unless current_user? user %>
+                    <% if can? :update, user %>
+                      <%= link_to edit_admin_user_path user do %>
+                        <i class="fa fa-pen"></i>
+                      <% end %>
+                    <% end %>
+                    <% if can? :delete, user %>
+                      <%= link_to admin_user_path(user), method: :delete ,data: { confirm: "Are you sure?" } do %>
+                        <i class="fa fa-trash mx-3"></i>
+                      <% end %>
+                    <%  end %>
+                    <% if can? :read, @user %>
+                      <%= link_to admin_user_path(user), method: :get do %>
+                        <i class="fa fa-eye"></i>
+                      <% end %>
+                    <%  end %>
+                <% else %>
+                    <span class="badge bg-info">You</span>
+                <% end %>
+
+            </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

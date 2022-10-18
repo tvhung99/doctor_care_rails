@@ -1,0 +1,31 @@
+@import "base";
+.errors {
+  color: red;
+}
+label.required{
+  &:after{
+    content: "Requried";
+    margin-left: 5px;
+    font-size: 12px;
+    background-color: #666666;
+    padding: 2px 5px;
+    color: white;
+  }
+}
+
+.form{
+  &-control{
+    border: none;
+    outline: none;
+  }
+}
+
+.btn{
+  border-radius: 100px !important;
+  &__primary{
+    background-color: $primary !important;
+    color: white !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+}

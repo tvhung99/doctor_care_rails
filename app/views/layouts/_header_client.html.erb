@@ -1,0 +1,45 @@
+<header class="header">
+  <section class="header__logo">
+    <div class="header__image">
+      <%= image_tag "/images/logo.png", class: '' %>
+    </div>
+    <div class="header__slogan f-w-bold ps-3">Phòng bệnh hơn chữa bệnh</div>
+  </section>
+  <section class="header__search"></section>
+  <section class="header__user d-flex align-items-center gap-5">
+    <nav class="header__nav d-flex">
+      <ul class="header__nav-list d-flex gap-3">
+        <li class="header__nav-item">
+          <%= link_to "Trang chủ", root_path, class: "sidebar__link" %>
+        </li>
+        <li class="header__nav-item">
+          <%= link_to "Chuyên khoa", specialties_path, class: "sidebar__link" %>
+        </li>
+        <li class="header__nav-item">
+          <%= link_to "Phòng khám", clinics_path, class: "sidebar__link" %>
+        </li>
+      </ul>
+    </nav>
+    <% if logged_in? %>
+      <div class="d-flex align-items-center">
+        <%= current_user.last_name %> <%= current_user.first_name %>
+        <%= image_tag "/images/default.jpg", class: 'nav-item nav-link dropdown-toggle text-secondary rounded-circle avatar p-0 ms-2','data-bs-toggle': :dropdown, 'aria-expanded':'false' %>
+        <div class="dropdown-menu nav-link-menu custom-position">
+          <ul class="nav-list ps-0">
+            <li><a href="" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
+            <li><a href="" class="dropdown-item"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a></li>
+            <div class="dropdown-divider"></div>
+
+            <li>
+
+              <%= link_to "Logout", logout_path, class: "dropdown-item", method: :delete   %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to "Login", login_path, class: "btn btn__primary", type: "button"  %>
+    <% end %>
+  </section>
+</header>

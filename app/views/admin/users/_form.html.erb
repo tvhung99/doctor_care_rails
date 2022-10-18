@@ -1,0 +1,109 @@
+
+<div class="mt-5 form">
+    <%- is_new = current_page?(new_admin_user_path) %>
+    <%= form_with model: @user, url: is_new ? admin_users_path : admin_user_path(@user.id), method: is_new ? :post : :put, id: 'new_user' do |f| %>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <%= f.label "Họ và tên", class: "form-label required" %>
+                        <%= f.text_field :first_name, class: "form-control", placeholder: "Họ" %>
+                    </div>
+                    <div class="col-6"> 
+                        <%= f.label :last_name, "&nbsp;".html_safe, class: "form-label" %>
+                        <%= f.text_field :last_name, class: "form-control", placeholder: "Tên" %>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                      <%- roles = current_user.super_admin? ? Role.all : Role.exclude_admin %>
+                        <%= f.label "Role", class: "form-label required" %>
+                        <%= f.collection_select :role_id, roles,:id,:name, {}, {class: "form-select ",disabled: !is_new && @user.doctor?} %>
+                    </div>
+                </div>
+                <div class="row mt-2" id="user_doctor_clinic_id">
+                    <div class="col-12">
+                        <%= f.label "Phòng khám", class: "form-label required" %>
+                        <%= f.collection_select :clinic_id, Clinic.all,:id,:name,{ selected: @user&.doctor&.clinic_id }, {class: "form-select"} %>
+                    </div>
+                </div>
+                <div class="row mt-2" id="user_doctor_specialty_id">
+                    <div class="col-12">
+                        <%= f.label "Chuyên khoa", class: "form-label required" %>
+                        <%= f.collection_select :specialty_id, Specialty.all,:id,:name,{selected: @user&.doctor&.specialty_id}, {class: "form-select"} %>
+                    </div>
+                </div>
+              <div class="row mt-2" id="user_doctor_degree_id">
+                <div class="col-12">
+                  <%= f.label "Chức danh", class: "form-label required" %>
+                  <%- selected =  @user&.doctor&.degree_ids&.split('-')  %>
+                  <%= f.collection_select :degree_ids, Degree.all,:id,:name,{selected: selected&.map{|s| s.to_i}}, {class: "form-select",:multiple => true} %>
+                </div>
+              </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <%= f.label "Ngày sinh", class: "form-label required" %>
+                        <%= f.date_field :date_of_birth, class: "form-control", max: Date.today, min: "01/01/1900" %>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <%= f.label "Giới tính", class: "form-label required" %>
+                    <div class="col-12">
+                        <%= f.radio_button :gender, 'female' %> 
+                        <%= f.label :gender, 'Nam', :value => 'female' %>
+                        <%= f.radio_button :gender, 'male' %>
+                        <%= f.label :gender, 'Nữ', :value => 'male' %>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <%= f.label "Số điện thoại", class: "form-label" %>
+                        <%= f.text_field :phone_number, class: "form-control", placeholder: "09xxxxxxxx" %>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <%= f.label "Email", class: "form-label required" %>
+                        <%= f.text_field :email, class: "form-control", placeholder: "Email", :disabled => !is_new %>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <%= f.label "Địa chỉ", class: "form-label" %>
+                        <%= f.text_field :address, class: "form-control", placeholder: "Địa chỉ" %>
+                    </div>
+                </div>
+                <% if is_new  %>
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <%= f.label "Mật khẩu", class: "form-label required" %>
+                      <%= f.text_field :password, class: "form-control", placeholder: "Mật khẩu" %>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <%= f.label "Nhập lại mật khẩu", class: "form-label required" %>
+                      <%= f.text_field :password_confirmation, class: "form-control", placeholder: "Nhập lại mật khẩu" %>
+                    </div>
+                  </div>
+                <% end %>
+                <div class="d-grid gap-2 mt-2">
+                    <%= f.submit is_new ? "Tạo tài khoản" : "Cập nhật", class: "btn btn-primary" %>
+                </div>
+            </div>
+            <div class="col-6" id="user_doctor_description">
+                <%= f.label "Thông tin", class: "form-label" %>
+                <div class="form-group">
+                    <%= f.rich_text_area :description, value: @user&.doctor&.description %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"> 
+    </script>
+    <script type="text/javascript">
+      <%= render "validate.js" %>
+      <%= render "event.js" %>
+    </script>
+</div>

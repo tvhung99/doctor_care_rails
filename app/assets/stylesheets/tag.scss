@@ -1,0 +1,20 @@
+.tag{
+  padding-right: 30px !important;
+  position: relative;
+  &::after{
+    content: "x";
+    position: absolute;
+    right:10px;
+    top: 2px;
+    font-size: 15px;
+  }
+}
+
+.ribbon{
+  width: 900px;
+  margin: 20px auto 0 !important;
+  font-size: 40px;
+  border-radius: 100px;
+  box-shadow: 0 20px 20px -20px #a5d7ff;
+  background: linear-gradient(340.06deg,#fff 30%,rgba(255,255,255,0) 103.99%);
+}
