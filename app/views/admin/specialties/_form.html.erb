@@ -12,6 +12,18 @@
         </div>
         <div class="row mt-2">
           <div class="col-12">
+            <%= f.label "Title", class: "form-label required" %>
+            <%= f.text_field :short_description, class: "form-control", placeholder: "Title" %>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <%= f.label "Issue Title", class: "form-label required" %>
+            <%= f.text_field :issue_title, class: "form-control", placeholder: "Issue Title" %>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
             <%= f.label "Hình ảnh", class: "form-label required" %>
             <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control" %>
           </div>

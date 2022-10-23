@@ -8,6 +8,39 @@
       <h1 class="h1"><%= @specialty.name %></h1>
     </div>
   </div>
+
+  <h3 class="h5 mt-5">Các vấn đề về <%= @specialty.name %> </h3>
+  <% @specialty.specialty_issues.each do |issue| %>
+    <%= link_to  admin_specialty_issue_path(issue&.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+      <span class="badge rounded-pill bg-info text-light tag "><%= issue&.name %></span>
+    <% end %>
+  <% end %>
+
+  <div class="row">
+    <button class="btn btn__primary mt-4" data-bs-toggle="modal" data-bs-target="#add-specialty-issue-modal">Thêm vấn đề về <%= @specialty.name %></button>
+    <div class="modal fade" id="add-specialty-issue-modal" tabindex="-1" aria-labelledby="add-specialty-issue-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thêm vấn đề</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: admin_specialty_issues_path, method: :post do |f| %>
+              <div class="col-12">
+                <%= f.hidden_field :specialty_id, value: @specialty.id %>
+                <%= f.label "Tên", class: "form-label" %>
+                <%= f.text_field :name,class:'form-control', placeholder: 'Nhập vấn đề' %>
+                <div class="d-flex justify-content-end mt-4">
+                  <%= f.submit "Thêm", class: "btn btn__primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <h3 class="h3 mt-5">Chi tiết về <%= @specialty.name %></h3>
   <hr />
   <div class="row">

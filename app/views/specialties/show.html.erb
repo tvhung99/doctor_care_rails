@@ -1,13 +1,54 @@
-<h2 class="h3"><%= @specialty.name %></h2>
-<div class="row">
-  <div class="col-6">
-    <h4>Thông tin</h4>
-    <%= @specialty.description.html_safe %>
+<% content_for :title, "Chi tiết chuyên khoa" %>
+
+<div class="modal" tabindex="-1" id="modal-description">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tổng quan về chuyên khoa <%= @specialty.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="html_render">
+          <%= @specialty.description.html_safe %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-6">
-    <h4>Bác sĩ</h4>
-    <% @doctors.each do  |doctor| %>
-     <%= doctor.user.first_name + " " + doctor.user.last_name %>
-    <% end %>
+</div>
+
+<div class="specialty">
+  <div class="row specialty__top">
+    <div class="col-12 specialty__banner" style="background-image: url('/images/specialty.svg')" >
+      <div class="container">
+        <div class="specialty__content">
+          <div class="specialty__heading">
+            <h1 class="specialty__heading-primary">
+              <%= @specialty.name %>
+            </h1>
+            <p class="specialty__heading-text mt-3">
+                <%= @specialty.short_description %>
+            </p>
+            <button class="button button__white" data-bs-toggle="modal" data-bs-target="#modal-description">Tìm hiểu thêm</button>
+          </div>
+        </div>
+      </div>
+      <div class="specialty__service" style="background-image: url('<%= url_for @specialty.images.last %>'); background-size: contain;"></div>
+    </div>
+  </div>
+  <div class="container">
+    <section class="specialty__issue my-4">
+      <h2 class="text-center f-36 f-w-bold ">
+        <%= @specialty.issue_title %>
+      </h2>
+      <hr class="divider d-block mt-3 mb-5 mx-auto" />
+      <div class="specialty__issue-list">
+        <% @issues.each do |issue| %>
+          <span class="specialty__issue-item"><%= issue.name %></span>
+        <% end %>
+      </div>
+    </section>
+    <section class="specialty__doctor">
+
+    </section>
   </div>
 </div>

@@ -48,11 +48,11 @@ class Admin::SpecialtiesController < Admin::AdminController
   private
 
   def specialty_params
-    params.require(:specialty).permit(:name, :description, :image)
+    params.require(:specialty).permit(:name, :description, :image, :short_description, :issue_title)
   end
 
   def specialty_params_update
-    params.require(:specialty).permit(:name, :description)
+    params.require(:specialty).permit(:name, :description, :short_description, :issue_title)
   end
 
   def image_param

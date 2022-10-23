@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_18_154110) do
+ActiveRecord::Schema.define(version: 2022_10_19_142848) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -173,6 +173,8 @@ ActiveRecord::Schema.define(version: 2022_10_18_154110) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
+    t.string "short_description"
+    t.string "issue_title"
     t.index ["deleted_at"], name: "index_specialties_on_deleted_at"
   end
 
@@ -181,6 +183,8 @@ ActiveRecord::Schema.define(version: 2022_10_18_154110) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_specialty_issues_on_deleted_at"
     t.index ["specialty_id"], name: "index_specialty_issues_on_specialty_id"
   end
 
