@@ -1,8 +1,22 @@
 .main {
   margin-top: 70px;
-  padding-left: 140px;
+  padding: 0 50px 0 200px;
   &-content{
     padding-top: 66px;
   }
+}
+
+.html_render{
+  img{
+    width: 100%;
+    height: auto !important;
+  }
+}
+
+.divider{
+  background-color: red;
+  height: 3px !important;
+  border: 0;
+  width: 100px;
 }
 

@@ -20,12 +20,26 @@ label.required{
   }
 }
 
-.btn{
-  border-radius: 100px !important;
+.button{
+  border-radius: 100px;
+  padding: 10px 20px;
+  border:none;
+  outline: none;
+  &:focus, &:active{
+    border:none;
+    outline: none;
+  }
   &__primary{
-    background-color: $primary !important;
-    color: white !important;
-    padding-left:20px !important;
-    padding-right:20px !important;
+    background-color: $primary;
+    color: white;
+  }
+
+  &__secondary{
+    background-color: $secondary;
+    -webkit-text-fill-color: black !important;
+  }
+  &__white{
+    background-color:white;
+    -webkit-text-fill-color: black !important;
   }
 }

@@ -20,7 +20,7 @@ html {
  * Remove the margin in all browsers.
  */
 
-* {
+*:not(i) {
   font-family: 'Be Vietnam Pro', sans-serif !important;
 }
 

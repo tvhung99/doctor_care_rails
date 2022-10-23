@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :specialties
 
     resources :clinic_specialty_mappings
+    resources :specialty_issues, only: [:create, :destroy]
   end
 
 end

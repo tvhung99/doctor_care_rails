@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%#= full_title(yield(:title)) %></title>
+    <title><%= (yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -17,31 +17,18 @@
 
   <body>
     <div id="body-pd">
-        <% if current_user&.admin? %>
-            <%= render 'layouts/header' %>
-            <%= render 'layouts/sidebar' %>
-
-            <div class="main">
-              <% flash.each do |message_type, message| %>
-                <div class="alert alert-<%= message_type %>"><%= message %></div>
-              <% end %>
+      <%  unless current_page? login_path %>
+        <div class="main-content">
+          <%= render 'layouts/header_client' %>
+          <div class="d-flex w100">
+            <div class="w100">
               <%= yield %>
             </div>
-        <% else %>
-          <%  unless current_page? login_path %>
-            <div class="main-content">
-              <%= render 'layouts/header_client' %>
-              <div class="d-flex w100">
-                <div class="w100">
-                  <%= yield %>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <%= yield %>
-          <% end %>
-
-        <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
